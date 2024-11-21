@@ -180,6 +180,8 @@ def dataStructTransform(data):
     return merged_data
 
 def showCPD(dbn):
+    """show the CPD(conditional probability distribution) result of dbn model"""
+    print('---------------------show CPD result of dbn model----------------------')
     # 获取CPDs并转换为DataFrame
     cpd_data = []
     for cpd in dbn.get_cpds():
@@ -193,7 +195,10 @@ def showCPD(dbn):
     return
 
 def createDBNModel():
+    """create DBN model by define nodes, edges and initiate CPD value"""
+    print("---------------------create dbn model----------------------")
     # 定义节点的取值范围和间隔
+    # 节点的取值范围离散化
     I_values = [0, 1]
     Dp_values = list(range(-20, 61, 5))
     Dv_values = list(range(-10, 11))
@@ -218,6 +223,9 @@ def createDBNModel():
     # Dp: distance_to_stopline
     # Dv: delta_velocity
     # V: velocity
+    # I -->  D
+    #   -->  Dp   --> V
+    #   -->  Dv
     dbn = DBN([
         (('I', 0), ('D', 0)), (('I', 0), ('Dp', 0)), (('I', 0), ('Dv', 0)), (('Dp', 0), ('V', 0)),
         (('I', 0), ('I', 1)), (('D', 0), ('D', 1)), (('Dp', 0), ('Dp', 1))
@@ -264,10 +272,9 @@ def createDBNModel():
                              evidence_card=[parent_cardinality[0], parent_cardinality[1], parent_cardinality[2]])
             dbn.add_cpds(cpd)
 
-
     # 检查模型的结构和参数是否正确
-    print(dbn.check_model())
-    # print(dbn.check_model())
+    print("------------check dbn model---------------\n", dbn.check_model())
+
     return dbn
 
 def inferring(dbn, track):
@@ -398,6 +405,22 @@ def evaluate(test_data, model=None):
     for test_sample in test_data:
         inferring(dbn, test_sample)
 
+def main(mode_):
+    """main function"""
+
+    # 训练数据格式转换
+    train_data1, test_data1 = trainDataTake()
+    train_data2, test_data2 = trainDataTake2()
+
+    dbn = None
+    # 训练模型
+    if mode_['train']:
+        dbn = train(train_data1, save_model=mode_['save'])
+
+    # 评估模型
+    if mode_['evaluate']:
+        evaluate(test_data1, model=dbn)
+
 
 if __name__ == "__main__":
     # 设置NUMEXPR_MAX_THREADS环境变量
@@ -412,19 +435,10 @@ if __name__ == "__main__":
         'evaluateOnly': {'train': False, 'save': False, 'evaluate': True},
         'updateModel': {'train': True, 'save': True, 'evaluate': True}
     }
-    mode = mode_select['evaluateOnly']
 
-    # 训练数据格式转换
-    train_data1, test_data1 = trainDataTake()
-    train_data2, test_data2 = trainDataTake2()
+    mode = 'evaluateOnly'
+    mode_ = mode_select[mode]
 
-    dbn = None
-    # 训练模型
-    if mode['train']:
-        dbn = train(train_data1, save_model=mode['save'])
-
-    # 评估模型
-    if mode['evaluate']:
-        evaluate(test_data1, model=dbn)
+    main(mode_)
 
 
