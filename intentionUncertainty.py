@@ -12,7 +12,7 @@ def main(mode_):
     train_data1, test_data1 = trainDataTake()
     # train_data2, test_data2 = trainDataTake2()
 
-    dbn = dynamicBayesianNetworkModel(file_path=file_path)
+    dbn = dynamicBayesianNetworkModel(file_path=MODEL_PATH)
 
     # 训练模型
     if mode_['train']:
@@ -22,14 +22,13 @@ def main(mode_):
 
     # 评估模型
     if mode_['evaluate']:
-        dbn.evaluate(test_data1, model=dbn)
+        dbn.evaluate(test_data1)
 
 
 if __name__ == "__main__":
     # 设置NUMEXPR_MAX_THREADS环境变量
     os.environ["NUMEXPR_MAX_THREADS"] = "8"  # 设置为所需的线程数
     pd.options.mode.chained_assignment = None  # 默认为 'warn'
-    file_path = 'trained_dbn_model_straight.pkl'
 
     # 设置训练和评估的类型
     # [是否训练、是否保存模型、是否评估模型]

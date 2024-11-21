@@ -7,13 +7,13 @@ def trainDataTake():
     straight_col = [10, 16, 18, 19]
     left_col = [3, 16, 17, 18]
     # 训练数据
-    meta_path = r"C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\数据\SIND模糊场景数据\fuzzy_state_tracks_70组数据\fuzzy_state_meta.xlsx"
+    meta_path = META_PATH
     # 提取需要的交互对
     meta = pd.read_excel(meta_path, sheet_name="Sheet1", header=0, skiprows=[1])
     meta = meta[meta["ego_entrance"] == 1] # 左转车进口道为西进口道
     meta = meta[meta["sig_state"] != 0]    # 信号灯为绿灯
     # 轨迹存储路径
-    new_path = r"C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\数据\SIND模糊场景数据\fuzzy_state_tracks"
+    new_path = NEW_PATH
 
     train_data_combined = pd.DataFrame()
     test_data_combined = pd.DataFrame()
@@ -60,12 +60,12 @@ def trainDataTake2():
     straight_col = [10, 16, 18, 19]
     left_col = [3, 16, 17, 18]
     # 训练数据
-    meta_path = r"C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\数据\驾驶模拟实验数据\格式化数据\total.csv"
+    meta_path = META_PATH_SILAB
     # 提取需要的交互对
     meta = pd.read_csv(meta_path,header=0)
 
     # 轨迹存储路径
-    new_path = r"C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\数据\驾驶模拟实验数据\格式化数据"
+    new_path = NEW_PATH_SILAB
 
     train_data_combined = pd.DataFrame()
     test_data_combined = pd.DataFrame()

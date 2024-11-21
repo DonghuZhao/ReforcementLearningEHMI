@@ -1,0 +1,6 @@
+#fuzzy_state_meta.xlsx文件为为车-车交互中通行权不明确的轨迹数据
+#每个sheet为包含两个交互对象的轨迹数据，共68组
+#每组数据中第一个track_id为左转车，第二个track_id为直行车
+#每组数据交互对象数据长度一致，由双方均进入交叉口停止线前5m的时刻开始，至一方通过冲突点后结束
+#剔除了车辆起步时速度慢于0.1m/s的数据
+#fuzzy_state_meta.xlsx文件为各交互组元数据，包含[id, type, ego_state, obj_state, pass_seq, dist, delta_v, sig_state, pet, ego_entrance]共10个字段
