@@ -2,18 +2,15 @@ from dynamicBayesianNetworkModel import *
 from data_preprocess import *
 from config import *
 
-# HyperParams
-INTENTION_TRANS_PROB = 0.1
-
 def main(mode_):
     """main function"""
-
+    # 模型存储路径
+    model_path = MODEL_PATH_STRAIGHT if TARGET_OBJECT == 'Straight' else MODEL_PATH_LEFT
     # 训练数据格式转换
-    train_data1, test_data1 = trainDataTake()
-    # train_data2, test_data2 = trainDataTake2()
+    train_data1, test_data1 = loadSinDData(targetObject=TARGET_OBJECT)
+    train_data2, test_data2 = loadSilabData(targetObject=TARGET_OBJECT)
 
-    dbn = dynamicBayesianNetworkModel(file_path=MODEL_PATH)
-
+    dbn = dynamicBayesianNetworkModel(file_path=model_path)
     # 训练模型
     if mode_['train']:
         dbn.train(train_data1, save_model=mode_['save'])
@@ -38,7 +35,7 @@ if __name__ == "__main__":
         'updateModel': {'train': True, 'save': True, 'evaluate': True}
     }
 
-    mode = 'evaluateOnly'
+    mode = 'updateModel'
     mode_ = mode_select[mode]
 
     main(mode_)
