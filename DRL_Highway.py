@@ -49,4 +49,4 @@ if __name__ == '__main__':
     path = 'model/DRL_Highway.pkl'
     ppo = PPO.Agent(env)
     # ppo = PPO_discrete.Agent(env)
-    # ppo.train()
+    ppo.train()
