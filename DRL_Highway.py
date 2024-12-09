@@ -33,8 +33,8 @@ if __name__ == '__main__':
     env.get_wrapper_attr('config')["duration"] = 20 # 30
     env.get_wrapper_attr('config')["observation"]["vehicles_count"] = 2
     # configuration for environment test
-    env.get_wrapper_attr('config')["action"]["type"] = "DiscreteMetaAction"
-    env.get_wrapper_attr('config')["action"]["lateral"] = False
+    # env.get_wrapper_attr('config')["action"]["type"] = "DiscreteMetaAction"
+    # env.get_wrapper_attr('config')["action"]["lateral"] = False
     # if env.get_wrapper_attr('config')["action"]["EHMI"]:
     #     env.get_wrapper_attr('config')["observation"]["features"] = \
     #         ["presence", "x", "y", "vx", "vy", "cos_h", "sin_h", "lat_off", "ang_off", "EHMI", "Safety"]
@@ -43,10 +43,10 @@ if __name__ == '__main__':
     # env.get_wrapper_attr('config')["action"]["lateral"] = False
     env.reset()
     # 环境测试
-    env_test(env)
+    # env_test(env)
 
-    # # 模型训练
-    # path = 'model/DRL_Highway.pkl'
-    # ppo = PPO.Agent(env)
-    # # ppo = PPO_discrete.Agent(env)
-    # ppo.train()
+    # 模型训练
+    path = 'model/DRL_Highway.pkl'
+    ppo = PPO.Agent(env)
+    # ppo = PPO_discrete.Agent(env)
+    ppo.train()

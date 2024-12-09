@@ -42,7 +42,7 @@ class Policy(nn.Module):
         # print(x)
         # print(self.out(x))
         prob = F.softmax(self.out(x), dim=0)  # 使用softmax获取概率分布
-        print(prob)
+        # print(prob)
         return prob
 
     def check_nan_parameters_in_net(self):
@@ -146,10 +146,11 @@ class Agent(object):
 
             # 计算新策略下的动作概率分布
             prob_new = self.p(s)
-
-            print(prob_new, a, advantage)
+            prob_old = self.old_p(s)
+            # print('prob_new:\n', prob_new, 'a:\n', a, 'advantage:\n', advantage)
             # 计算策略网络的损失，使用交叉熵损失乘以优势函数
-            policy_loss = F.cross_entropy(prob_new, a) * advantage
+            # policy_loss = F.cross_entropy(prob_new, a) * advantage
+            policy_loss = F.cross_entropy(prob_new, prob_old) * advantage
 
             # 计算价值网络损失
             value_loss = F.huber_loss(td_target, self.v(s))
@@ -214,7 +215,7 @@ class Agent(object):
                     a_ = a_[:2]
                 # s_, r, done, truncated, _ = self.env.step(a_)
                 # s_ = s_[:9]
-                # self.env.render()
+                self.env.render()
 
                 rewards += r
 
