@@ -23,6 +23,10 @@ EXPLORATION_RATE = 0.1
 NOISE_SCALE = 0.1
 TIME = time.strftime("%Y%m%d%H%M%S",time.localtime())
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
+print("Using device:", device)
+
 class Policy(nn.Module):
     def __init__(self, state_size, action_size):
         super(Policy, self).__init__()
@@ -37,6 +41,9 @@ class Policy(nn.Module):
         self.μ = nn.Linear(256, action_size)
         self.σ = nn.Linear(256, action_size)
         self.optim = torch.optim.Adam(self.parameters(), lr=LR_p)
+
+        # to cuda
+        self.to(device)
 
     def forward(self, x):
         temp = x
@@ -70,6 +77,8 @@ class Value(nn.Module):
             nn.Linear(256, 1),
         )
         self.optim = torch.optim.Adam(self.parameters(), lr=LR_v)
+
+        self.to(device)
  
     def forward(self, x):
         x = self.net(x)
@@ -95,17 +104,20 @@ class Agent(object):
         if env:
             self.env = env
             self.isHaveEHMI = self.env.get_wrapper_attr('config')["action"]["EHMI"]
-            self.state_size = int(self.env.observation_space.shape[0] * self.env.observation_space.shape[1])
-            self.state_size = self.state_size + 4 if self.isHaveEHMI else self.state_size
-            # self.state_size = 9
+            # self.state_size = int(self.env.observation_space.shape[0] * self.env.observation_space.shape[1])
+            # self.state_size = self.state_size + 4 if self.isHaveEHMI else self.state_size
+            self.state_size = 9
+            self.state_size = self.state_size + 2 if self.isHaveEHMI else self.state_size
+            # self.state_size = 14 # 雷达信息v2
+            # self.state_size += 3 # 雷达信息v1
             self.action_size = self.env.action_space.shape[0] if not self.isHaveEHMI else self.env.action_space.shape[0] + 1
         else:
             self.loadAgentParas(agent_path)
 
-        self.v = Value(self.state_size)
-        self.p = Policy(self.state_size, self.action_size)
-        self.old_p = Policy(self.state_size, self.action_size)        #旧策略网络
-        self.old_v = Value(self.state_size)         #旧价值网络    用于计算上次更新与下次更新的差别
+        self.v = Value(self.state_size).to(device)
+        self.p = Policy(self.state_size, self.action_size).to(device)
+        self.old_p = Policy(self.state_size, self.action_size).to(device)      #旧策略网络
+        self.old_v = Value(self.state_size).to(device)         #旧价值网络    用于计算上次更新与下次更新的差别
 
         self.data = []               #用于存储经验
         self.step = 0
@@ -114,7 +126,7 @@ class Agent(object):
         self.average_rewards = 0
         self.sum_rewards = 0
 
-        self.initial_epsilon = 0.4  # 0.2
+        self.initial_epsilon = 0.2
         self.min_epsilon = 0.01
 
         self.writer = SummaryWriter(comment=TIME)
@@ -123,23 +135,24 @@ class Agent(object):
     
     def choose_action(self, s):
         with torch.no_grad():
+            s = s.to(device)
             μ, σ = self.old_p(s)
             actions = []
             # self.step = 10000
             epsilon = self.initial_epsilon * (self.min_epsilon / self.initial_epsilon) ** (self.step / MAX_EPOCHS)
-            epsilon = max(epsilon, 0.01)
+            epsilon = max(epsilon, 0.01) if self.step < 2000 else 0
             # print(epsilon)
             for i in range(self.action_size):
                 distribution = torch.distributions.Normal(μ[i], σ[i])
                 action = distribution.sample()
-                # 以一定的概率添加噪声
-                if random.random() < epsilon:
-                    noise = torch.randn(1) * NOISE_SCALE
-                    action += noise[0]
-                    # 确保动作在合法范围内
-                    action = torch.clamp(action, -0.5, 0.5)
-                    # 将 action 转换回零维张量
-                    action = action.squeeze()
+                # # 以一定的概率添加噪声
+                # if random.random() < epsilon:
+                #     noise = torch.randn(1) * NOISE_SCALE
+                #     action += noise[0]
+                #     # 确保动作在合法范围内
+                #     action = torch.clamp(action, -0.5, 0.5)
+                #     # 将 action 转换回零维张量
+                #     action = action.squeeze()
                 # print(action)
                 actions.append(action.item())
         return actions
@@ -161,11 +174,11 @@ class Agent(object):
             l_r.append(torch.tensor([[r]], dtype=torch.float))
             l_s_.append(torch.tensor([s_], dtype=torch.float))
             l_done.append(torch.tensor([[done]], dtype=torch.float))
-        s = torch.cat(l_s, dim=0)
-        a = torch.cat(l_a, dim=0)
-        r = torch.cat(l_r, dim=0)
-        s_ = torch.cat(l_s_, dim=0)
-        done = torch.cat(l_done, dim=0)
+        s = torch.cat(l_s, dim=0).to(device)
+        a = torch.cat(l_a, dim=0).to(device)
+        r = torch.cat(l_r, dim=0).to(device)
+        s_ = torch.cat(l_s_, dim=0).to(device)
+        done = torch.cat(l_done, dim=0).to(device)
         self.data = []
         return s, a, r, s_, done
  
@@ -191,14 +204,19 @@ class Agent(object):
                     log_prob_old += old_dist_i.log_prob(a_i)
 
                 td_error = r + GAMMA * self.v(s_) * (1 - done) - self.v(s)
-                td_error = td_error.detach().numpy()
                 A = []
                 adv = 0.0
-                for td in td_error[::-1]:
-                    adv = adv * GAMMA * LAMBDA + td[0]
-                    A.append(adv)
+                if device.type == 'cuda':
+                    for td in td_error.flip(dims=[0]):  # 使用flip代替[::-1]来反转Tensor
+                        adv = adv * GAMMA * LAMBDA + td
+                        A.append(adv)
+                else:
+                    td_error = td_error.detach().numpy()
+                    for td in td_error[::-1]:
+                        adv = adv * GAMMA * LAMBDA + td[0]
+                        A.append(adv)
                 A.reverse()
-                A = torch.tensor(A, dtype=torch.float).reshape(-1, 1)
+                A = torch.tensor(A, dtype=torch.float, device=device).reshape(-1, 1)
 
             μ, σ = self.p(s)
             log_prob_new = 0
@@ -249,7 +267,6 @@ class Agent(object):
         self.loadNetParas()
         # print('state_size:', self.state_size)
         # print('action_size:', self.action_size)
-        # print(self.env.get_wrapper_attr('config')["duration"])
         for count in range(MAX_EPOCHS):
 
             s = self.env.reset()[0]
@@ -257,14 +274,10 @@ class Agent(object):
             # s = self.env.reset()[0][:9]
             done = False
             rewards = 0
-            # plot = np.zeros((2, 1000))
 
             while not done:
                 # print(s)
                 # s = np.array(s)
-
-                # plot[0, i] = s[0]
-                # plot[1, i] = s[1]
 
                 a = self.choose_action(torch.tensor(s, dtype=torch.float))
                 a_ = copy.deepcopy(a)
@@ -284,11 +297,7 @@ class Agent(object):
 
             self.sum_rewards += rewards
             self.update()
-            # try:
-            #     self.update()
-            # except Exception as e:
-            #     print(f'update error:{e}')
-            #     continue
+
             if count > 0 and count % 10 == 0:
 
                 self.average_rewards = self.sum_rewards / 10

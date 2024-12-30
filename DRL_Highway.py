@@ -17,6 +17,7 @@ def env_test(env):
         action = env.unwrapped.action_type.actions_indexes["IDLE"]
         obs, reward, done, truncated, info = env.step(action)
         print(obs)
+        print(done, truncated)
         env.render()
     # 绘制场景结束时的画面
     plt.imshow(env.render())
@@ -41,8 +42,8 @@ if __name__ == '__main__':
 
     # 环境参数更新
     # env.get_wrapper_attr('config')["action"]["lateral"] = False
-    env.reset()
-    # 环境测试
+    # env.reset()
+    # # 环境测试
     # env_test(env)
 
     # 模型训练
