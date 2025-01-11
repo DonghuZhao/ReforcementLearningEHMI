@@ -21,6 +21,7 @@ CLIP = 0.2
 MAX_EPOCHS = 20000
 EXPLORATION_RATE = 0.1
 NOISE_SCALE = 0.1
+MODEL_UPDATE_EPOCHS = 20  # 10
 TIME = time.strftime("%Y%m%d%H%M%S",time.localtime())
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -106,7 +107,7 @@ class Agent(object):
             self.isHaveEHMI = self.env.get_wrapper_attr('config')["action"]["EHMI"]
             # self.state_size = int(self.env.observation_space.shape[0] * self.env.observation_space.shape[1])
             # self.state_size = self.state_size + 4 if self.isHaveEHMI else self.state_size
-            self.state_size = 9
+            self.state_size = 10
             self.state_size = self.state_size + 2 if self.isHaveEHMI else self.state_size
             # self.state_size = 14 # 雷达信息v2
             # self.state_size += 3 # 雷达信息v1
@@ -298,11 +299,11 @@ class Agent(object):
             self.sum_rewards += rewards
             self.update()
 
-            if count > 0 and count % 10 == 0:
+            if count > 0 and count % MODEL_UPDATE_EPOCHS == 0:       # 10
 
-                self.average_rewards = self.sum_rewards / 10
+                self.average_rewards = self.sum_rewards / MODEL_UPDATE_EPOCHS
                 self.sum_rewards = 0
-                print(count - 9, '-', count, 'average_rewards:', self.average_rewards, 'max_average_rewards:',
+                print(count - MODEL_UPDATE_EPOCHS + 1, '-', count, 'average_rewards:', self.average_rewards, 'max_average_rewards:',
                       self.max_average_rewards, 'last_update_epoch:', self.last_update_step)
                 self.writer.add_scalar("Avg_Rewards_10", self.average_rewards, count)
 
@@ -339,7 +340,8 @@ class Agent(object):
             'exploration_rate': EXPLORATION_RATE,
             'noise_scale': NOISE_SCALE,
             'max_epochs': MAX_EPOCHS,
-            'max_average_reward': self.max_average_rewards
+            'max_average_reward': self.max_average_rewards,
+            'features_range': self.env.config['observation']['features_range'],
         }
 
     def saveAgentParas(self):
@@ -356,3 +358,4 @@ class Agent(object):
         self.action_size = params['action_size']
         self.isHaveEHMI = params['EHMI']
         self.max_average_rewards = params['max_average_reward']
+        self.features_range = params['features_range']

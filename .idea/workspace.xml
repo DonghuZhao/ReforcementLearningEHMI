@@ -5,24 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92be49b9-70e4-4971-91b1-76b005439201" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cuda_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/observation_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DRL_Highway.py" beforeDir="false" afterPath="$PROJECT_DIR$/DRL_Highway.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/PPO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_learning.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cuda_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p - 副本.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/p - 副本.pth" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/p.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/p.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v - 副本.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/v - 副本.pth" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/v.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/v.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Dec03_11-28-43_DESKTOP-R2Q96QV20241203112842/events.out.tfevents.1733196523.DESKTOP-R2Q96QV.56144.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Dec03_14-41-36_DESKTOP-R2Q96QV20241203144134/events.out.tfevents.1733208096.DESKTOP-R2Q96QV.57740.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no26_state_v1_presence_reward_v145_lr_1e-6_discretePosition_discreteSpeed_single/events.out.tfevents.1731512571.DESKTOP-R2Q96QV.12800.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no27_state_v1_presence_reward_v56_lr_1e-5_discretePosition_discreteSpeed_single/events.out.tfevents.1731569414.DESKTOP-R2Q96QV.15964.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no28_state_v1_presence_reward_v56_lr_1e-5_discretePosition_discreteSpeed/events.out.tfevents.1731570556.DESKTOP-R2Q96QV.5960.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no29_state_v1_presence_reward_v56_lr_1e-5_discretePosition_discreteSpeed_singleDifficult/events.out.tfevents.1731573805.DESKTOP-R2Q96QV.2540.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no30_state_v1_presence_reward_v567_lr_1e-5_discretePosition_discreteSpeed/events.out.tfevents.1731579285.DESKTOP-R2Q96QV.20700.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no31_state_v1_presence_reward_v567_lr_1e-5_discretePosition_discreteSpeed/events.out.tfevents.1731656481.DESKTOP-R2Q96QV.22240.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no32_state_v1_presence_reward_v567_lr_1e-5_discretePosition_discreteSpeed/events.out.tfevents.1731916655.DESKTOP-R2Q96QV.15420.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no34/events.out.tfevents.1732123640.DESKTOP-R2Q96QV.24724.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no35/events.out.tfevents.1732125307.DESKTOP-R2Q96QV.27704.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/no36/events.out.tfevents.1732126480.DESKTOP-R2Q96QV.21436.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/Dec30_13-07-11_Zzdh_X20241230130709/events.out.tfevents.1735535231.Zzdh_X.33020.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/Dec30_13-13-53_Zzdh_X20241230131351/events.out.tfevents.1735535633.Zzdh_X.1044.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/no45_state_v3_reward_v1_lr_1e-5_straight/events.out.tfevents.1735533866.Zzdh_X.37616.0" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +147,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/Projects/ReforcementLearningEHMI",
+    "last_opened_file_path": "C:/Users/11917/OneDrive - tongji.edu.cn/硕士/代码/FrenetPlanningForCave",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -163,10 +159,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\ReforcementLearningEHMI" />
       <recent name="C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\ReforcementLearningEHMI" />
       <recent name="C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\DBN" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\ReforcementLearningEHMI\map" />
       <recent name="C:\Users\ZDH\OneDrive - tongji.edu.cn\硕士\代码\ReforcementLearningEHMI\func_tools" />
     </key>
   </component>
@@ -175,9 +173,6 @@
       <module name="DBN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="C:\Users\ZDH\anaconda3\envs\dbn\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
       <option name="IS_MODULE_SDK" value="true" />
@@ -237,6 +232,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="config" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DBN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\ZDH\anaconda3\envs\dbn\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/map/config.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="cuda_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DBN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -259,20 +273,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="intentionUncertainty" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ReforcementLearningEHMI" />
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DBN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="C:\Users\ZDH\anaconda3\envs\dbn\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/intentionUncertainty.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -282,17 +293,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.config" />
+      <item itemvalue="Python.main" />
       <item itemvalue="Python.PPO" />
       <item itemvalue="Python.cuda_test" />
       <item itemvalue="Python.DRL_Highway" />
-      <item itemvalue="Python.intentionUncertainty" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.DRL_Highway" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.config" />
         <item itemvalue="Python.PPO" />
         <item itemvalue="Python.cuda_test" />
-        <item itemvalue="Python.intentionUncertainty" />
       </list>
     </recent_temporary>
   </component>
@@ -339,7 +352,12 @@
       <workItem from="1734342351886" duration="186000" />
       <workItem from="1734342549230" duration="3340000" />
       <workItem from="1734414444369" duration="13891000" />
-      <workItem from="1734763615461" duration="53136000" />
+      <workItem from="1734763615461" duration="53354000" />
+      <workItem from="1735804887112" duration="10931000" />
+      <workItem from="1736162817655" duration="2209000" />
+      <workItem from="1736237497723" duration="3603000" />
+      <workItem from="1736299737121" duration="1583000" />
+      <workItem from="1736319976985" duration="24405000" />
     </task>
     <servers />
   </component>
@@ -548,12 +566,12 @@
     <SUITE FILE_PATH="coverage/DBN$test.coverage" NAME="test Coverage Results" MODIFIED="1712045315880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1731916652213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$resultanalysis__1_.coverage" NAME="resultanalysis (1) Coverage Results" MODIFIED="1714965635027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
-    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$config.coverage" NAME="config Coverage Results" MODIFIED="1732283591124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$dbn.coverage" NAME="dbn Coverage Results" MODIFIED="1732202388450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$config.coverage" NAME="config Coverage Results" MODIFIED="1736320381424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$resultanalysis__2_.coverage" NAME="resultanalysis (2) Coverage Results" MODIFIED="1715305193850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$VisMain.coverage" NAME="VisMain Coverage Results" MODIFIED="1704445532457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$PPO.coverage" NAME="PPO Coverage Results" MODIFIED="1734417167363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
-    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1735535629481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1736521101013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$intersection_env2.coverage" NAME="intersection_env2 Coverage Results" MODIFIED="1716186513818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$resultanalysis.coverage" NAME="resultanalysis Coverage Results" MODIFIED="1714959899303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$cuda_test.coverage" NAME="cuda_test Coverage Results" MODIFIED="1734415323275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
@@ -561,6 +579,7 @@
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$intentionUncertainty.coverage" NAME="intentionUncertainty Coverage Results" MODIFIED="1732284446946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$intersection_env.coverage" NAME="intersection_env Coverage Results" MODIFIED="1716184135410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$DSF.coverage" NAME="DSF Coverage Results" MODIFIED="1717408108903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$main.coverage" NAME="main Coverage Results" MODIFIED="1736344311138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$dbn.coverage" NAME="dbn Coverage Results" MODIFIED="1731916368780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$intersection_visualizer.coverage" NAME="intersection_visualizer Coverage Results" MODIFIED="1704445592105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$tulun_feidishuliang.coverage" NAME="tulun_feidishuliang Coverage Results" MODIFIED="1716487306865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
