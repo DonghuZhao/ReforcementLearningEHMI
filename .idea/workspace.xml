@@ -6,17 +6,40 @@
   <component name="ChangeListManager">
     <list default="true" id="92be49b9-70e4-4971-91b1-76b005439201" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/PPO.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/agent.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/agent.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/p - 副本.pth" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/model/p.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/p.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/v - 副本.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no26.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no27.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no28.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no29.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no30.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no31.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no32.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no33.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no34.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no35.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no36.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no37.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no38.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no39.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p_no40.pth" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/model/v.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/v.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Jan10_21-52-01_Zzdh_X20250110215159/events.out.tfevents.1736517121.Zzdh_X.18732.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Jan10_22-51-59_Zzdh_X20250110225157/events.out.tfevents.1736520719.Zzdh_X.22816.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Jan10_22-53-01_Zzdh_X20250110225300/events.out.tfevents.1736520781.Zzdh_X.22720.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Jan10_22-58-25_Zzdh_X20250110225823/events.out.tfevents.1736521105.Zzdh_X.30756.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runs/Jan11_12-40-46_Zzdh_X20250111124043/events.out.tfevents.1736570446.Zzdh_X.34804.0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no26.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no27.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no28.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no29.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no30.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no31.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no32.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no33.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no34.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no35.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no36.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no37.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no38.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no39.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v_no40.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/runs/Jan12_16-00-27_Zzdh_X20250112160025/events.out.tfevents.1736668827.Zzdh_X.23108.0" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,7 +378,7 @@
       <workItem from="1736162817655" duration="2209000" />
       <workItem from="1736237497723" duration="3603000" />
       <workItem from="1736299737121" duration="1583000" />
-      <workItem from="1736319976985" duration="32987000" />
+      <workItem from="1736319976985" duration="36816000" />
     </task>
     <servers />
   </component>
@@ -580,7 +603,7 @@
     <SUITE FILE_PATH="coverage/DBN$resultanalysis__2_.coverage" NAME="resultanalysis (2) Coverage Results" MODIFIED="1715305193850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$VisMain.coverage" NAME="VisMain Coverage Results" MODIFIED="1704445532457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$PPO.coverage" NAME="PPO Coverage Results" MODIFIED="1734417167363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
-    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1736668823349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1736675578849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$intersection_env2.coverage" NAME="intersection_env2 Coverage Results" MODIFIED="1716186513818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$resultanalysis.coverage" NAME="resultanalysis Coverage Results" MODIFIED="1714959899303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$cuda_test.coverage" NAME="cuda_test Coverage Results" MODIFIED="1734415323275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
