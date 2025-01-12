@@ -14,7 +14,7 @@ os.chdir(sys.path[0])
 
 LR_v = 1e-5
 LR_p = 1e-5
-K_epoch = 8
+K_epoch = 5 # 8
 GAMMA = 0.99
 LAMBDA = 0.95
 CLIP = 0.2
@@ -102,6 +102,7 @@ class Agent(object):
     """
     def __init__(self, env=None, agent_path=r'.\model\agent.json'):
         # 加载Agent参数
+        self.agent_path = agent_path
         if env:
             self.env = env
             self.isHaveEHMI = self.env.get_wrapper_attr('config')["action"]["EHMI"]
@@ -113,7 +114,7 @@ class Agent(object):
             # self.state_size += 3 # 雷达信息v1
             self.action_size = self.env.action_space.shape[0] if not self.isHaveEHMI else self.env.action_space.shape[0] + 1
         else:
-            self.loadAgentParas(agent_path)
+            self.loadAgentParas(self.agent_path)
 
         self.v = Value(self.state_size).to(device)
         self.p = Policy(self.state_size, self.action_size).to(device)
@@ -265,7 +266,8 @@ class Agent(object):
                 print(f"NaN or inf detected in {name}, resetting to 0")
                 param.data.fill_(0)
     def train(self):
-        self.loadNetParas()
+        # self.loadAgentParas(self.agent_path)
+        # self.loadNetParas()
         # print('state_size:', self.state_size)
         # print('action_size:', self.action_size)
         for count in range(MAX_EPOCHS):
@@ -287,7 +289,7 @@ class Agent(object):
                     a_ = a_[:2]
                 s_, r, done, truncated, _ = self.env.step(a_)
                 # s_ = s_[:9]
-                self.env.render()
+                # self.env.render()
 
                 rewards += r
 
@@ -310,6 +312,7 @@ class Agent(object):
                 if self.max_average_rewards < self.average_rewards:
                     self.max_average_rewards = self.average_rewards
                     self.saveNetParas()
+                    self.saveAgentParas()
                     self.last_update_step = self.step
 
     def saveNetParas(self):
@@ -342,6 +345,7 @@ class Agent(object):
             'max_epochs': MAX_EPOCHS,
             'max_average_reward': self.max_average_rewards,
             'features_range': self.env.config['observation']['features_range'],
+            'step': self.step,
         }
 
     def saveAgentParas(self):
@@ -359,3 +363,4 @@ class Agent(object):
         self.isHaveEHMI = params['EHMI']
         self.max_average_rewards = params['max_average_reward']
         self.features_range = params['features_range']
+        self.step = params['step']
