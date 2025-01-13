@@ -14,7 +14,7 @@ os.chdir(sys.path[0])
 
 LR_v = 1e-5
 LR_p = 1e-5
-K_epoch = 5 # 8
+K_epoch = 8
 GAMMA = 0.99
 LAMBDA = 0.95
 CLIP = 0.2
@@ -34,6 +34,8 @@ class Policy(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(state_size, 128),
             nn.ReLU(),
+            # nn.Linear(128, 128),
+            # nn.ReLU(),
             # nn.Linear(128, 128),
             # nn.ReLU(),
             nn.Linear(128, 256),
@@ -71,6 +73,8 @@ class Value(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(state_size, 128),
             nn.ReLU(),
+            # nn.Linear(128, 128),
+            # nn.ReLU(),
             # nn.Linear(128, 128),
             # nn.ReLU(),
             nn.Linear(128, 256),

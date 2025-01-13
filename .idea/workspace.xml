@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92be49b9-70e4-4971-91b1-76b005439201" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/model/aggressive_left/agent.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/aggressive_left/p.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/aggressive_left/v.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/runs/Jan13_19-29-40_Zzdh_X20250113192938/events.out.tfevents.1736767780.Zzdh_X.31792.0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/runs/aggressive_left/events.out.tfevents.1736744519.Zzdh_X.18792.0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PPO.py" beforeDir="false" afterPath="$PROJECT_DIR$/PPO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/agent.json" beforeDir="false" afterPath="$PROJECT_DIR$/model/agent.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/p.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/p.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/v.pth" beforeDir="false" afterPath="$PROJECT_DIR$/model/v.pth" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,7 +353,7 @@
       <workItem from="1736162817655" duration="2209000" />
       <workItem from="1736237497723" duration="3603000" />
       <workItem from="1736299737121" duration="1583000" />
-      <workItem from="1736319976985" duration="43861000" />
+      <workItem from="1736319976985" duration="66959000" />
     </task>
     <servers />
   </component>
@@ -569,7 +578,7 @@
     <SUITE FILE_PATH="coverage/DBN$resultanalysis__2_.coverage" NAME="resultanalysis (2) Coverage Results" MODIFIED="1715305193850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$VisMain.coverage" NAME="VisMain Coverage Results" MODIFIED="1704445532457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$PPO.coverage" NAME="PPO Coverage Results" MODIFIED="1734417167363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
-    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1736675578849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$DRL_Highway.coverage" NAME="DRL_Highway Coverage Results" MODIFIED="1736767776537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$intersection_env2.coverage" NAME="intersection_env2 Coverage Results" MODIFIED="1716186513818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/DBN$resultanalysis.coverage" NAME="resultanalysis Coverage Results" MODIFIED="1714959899303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
     <SUITE FILE_PATH="coverage/ReforcementLearningEHMI$cuda_test.coverage" NAME="cuda_test Coverage Results" MODIFIED="1734415323275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
