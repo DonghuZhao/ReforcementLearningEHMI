@@ -113,7 +113,7 @@ class Agent(object):
             # self.state_size = int(self.env.observation_space.shape[0] * self.env.observation_space.shape[1])
             # self.state_size = self.state_size + 4 if self.isHaveEHMI else self.state_size
             self.state_size = 10
-            self.state_size = self.state_size + 2 if self.isHaveEHMI else self.state_size
+            self.state_size = self.state_size + 3 if self.isHaveEHMI else self.state_size
             # self.state_size = 14 # 雷达信息v2
             # self.state_size += 3 # 雷达信息v1
             self.action_size = self.env.action_space.shape[0] if not self.isHaveEHMI else self.env.action_space.shape[0] + 1
@@ -175,11 +175,11 @@ class Agent(object):
         l_s, l_a, l_r, l_s_, l_done = [], [], [], [], []
         for item in self.data:
             s, a, r, s_, done = item
-            l_s.append(torch.tensor([s], dtype=torch.float))
-            l_a.append(torch.tensor([a], dtype=torch.float))
-            l_r.append(torch.tensor([[r]], dtype=torch.float))
-            l_s_.append(torch.tensor([s_], dtype=torch.float))
-            l_done.append(torch.tensor([[done]], dtype=torch.float))
+            l_s.append(torch.tensor(np.array([s]), dtype=torch.float))
+            l_a.append(torch.tensor(np.array([a]), dtype=torch.float))
+            l_r.append(torch.tensor(np.array([[r]]), dtype=torch.float))
+            l_s_.append(torch.tensor(np.array([s_]), dtype=torch.float))
+            l_done.append(torch.tensor(np.array([[done]]), dtype=torch.float))
         s = torch.cat(l_s, dim=0).to(device)
         a = torch.cat(l_a, dim=0).to(device)
         r = torch.cat(l_r, dim=0).to(device)
@@ -289,7 +289,8 @@ class Agent(object):
                 a = self.choose_action(torch.tensor(s, dtype=torch.float))
                 a_ = copy.deepcopy(a)
                 if self.isHaveEHMI:
-                    self.env.unwrapped.EHMI = self.translateEHMI(a_[2])
+                    # self.env.unwrapped.EHMI = self.translateEHMI(a_[2])
+                    self.env.unwrapped.update_EHMI(self.translateEHMI(a_[2]))
                     a_ = a_[:2]
                 s_, r, done, truncated, _ = self.env.step(a_)
                 # s_ = s_[:9]
@@ -348,7 +349,7 @@ class Agent(object):
             'noise_scale': NOISE_SCALE,
             'max_epochs': MAX_EPOCHS,
             'max_average_reward': self.max_average_rewards,
-            'features_range': self.env.config['observation']['features_range'],
+            'features_range': self.env.unwrapped.config['observation']['features_range'],
             'step': self.step,
         }
 
