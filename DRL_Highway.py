@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 import os
 
 import PPO
+import PPO_HAC as PPO
 
 def env_test(env):
     # 绘制场景开始时的画面
