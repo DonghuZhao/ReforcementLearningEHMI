@@ -270,8 +270,8 @@ class Agent(object):
                 print(f"NaN or inf detected in {name}, resetting to 0")
                 param.data.fill_(0)
     def train(self):
-        # self.loadAgentParas(self.agent_path)
-        # self.loadNetParas()
+        self.loadAgentParas(self.agent_path)
+        self.loadNetParas()
         # print('state_size:', self.state_size)
         # print('action_size:', self.action_size)
         for count in range(MAX_EPOCHS):
@@ -294,7 +294,7 @@ class Agent(object):
                     a_ = a_[:2]
                 s_, r, done, truncated, _ = self.env.step(a_)
                 # s_ = s_[:9]
-                # self.env.render()
+                self.env.render()
 
                 rewards += r
 
