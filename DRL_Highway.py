@@ -39,6 +39,7 @@ if __name__ == '__main__':
     if ENV_TEST:
         env.get_wrapper_attr('config')["action"]["type"] = "DiscreteMetaAction"
         env.get_wrapper_attr('config')["action"]["lateral"] = False
+        env.get_wrapper_attr('config')["action"]["EHMI"] = False
 
         # 环境参数更新
         env.reset()
