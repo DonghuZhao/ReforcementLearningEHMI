@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.distributions import Categorical
 from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 import time
@@ -152,24 +153,24 @@ class Agent(object):
             # self.state_size = int(self.env.observation_space.shape[0] * self.env.observation_space.shape[1])
             # self.state_size = self.state_size + 4 if self.isHaveEHMI else self.state_size
             self.state_size = 10
-            self.state_size = self.state_size + 2 if self.isHaveEHMI else self.state_size
+            self.state_size = self.state_size + 3 if self.isHaveEHMI else self.state_size
             # self.state_size = 14 # 雷达信息v2
             # self.state_size += 3 # 雷达信息v1
-            self.action_size = self.env.action_space.shape[0] if not self.isHaveEHMI else self.env.action_space.shape[0] + 1
+            self.action_size = self.env.action_space.shape[0]
         else:
             self.loadAgentParas(self.agent_path)
 
-        self.v = Value(self.state_size).to(device)
-        self.p = Policy(self.state_size, self.action_size).to(device)
-        self.old_p = Policy(self.state_size, self.action_size).to(device)      #旧策略网络
-        self.old_v = Value(self.state_size).to(device)         #旧价值网络    用于计算上次更新与下次更新的差别
+        self.v = Value(self.state_size + 1).to(device)
+        self.p = Policy(self.state_size + 1, self.action_size).to(device)
+        self.old_p = Policy(self.state_size + 1, self.action_size).to(device)      #旧策略网络
+        self.old_v = Value(self.state_size + 1).to(device)         #旧价值网络    用于计算上次更新与下次更新的差别
 
         self.v_level0 = Value(self.state_size).to(device)
         self.p_level0 = DiscretePolicy(self.state_size, 1).to(device)
         self.old_p_level0 = DiscretePolicy(self.state_size, 1).to(device)
         self.old_v_level0 = Value(self.state_size).to(device)
-        self.data_level0 = []
 
+        self.data_level0 = []
         self.data = []               #用于存储经验
         self.step = 0
 
@@ -208,12 +209,19 @@ class Agent(object):
                 actions.append(action.item())
         return actions
 
+    def choose_action_level0(self, s):
+        with torch.no_grad():
+            s = s.to(device)
+            EHMI = self.p_level0(s)
+        return EHMI.argmax().item()
+
     def translateEHMI(self, value):
         if value > 0.5:
             return 'R'
         return 'Y'
 
-    def push_data(self, transitions):
+    def push_data(self, transitions_level0, transitions):
+        self.data_level0.append(transitions_level0)
         self.data.append(transitions)
  
     def sample(self):
@@ -232,7 +240,24 @@ class Agent(object):
         done = torch.cat(l_done, dim=0).to(device)
         self.data = []
         return s, a, r, s_, done
- 
+
+    def sample_level0(self):
+        l_s, l_a, l_r, l_s_, l_done = [], [], [], [], []
+        for item in self.data_level0:
+            s, a, r, s_, done = item
+            l_s.append(torch.tensor(np.array([s]), dtype=torch.float))
+            l_a.append(torch.tensor(np.array([a]), dtype=torch.float))
+            l_r.append(torch.tensor(np.array([[r]]), dtype=torch.float))
+            l_s_.append(torch.tensor(np.array([s_]), dtype=torch.float))
+            l_done.append(torch.tensor(np.array([[done]]), dtype=torch.float))
+        s = torch.cat(l_s, dim=0).to(device)
+        a = torch.cat(l_a, dim=0).to(device)
+        r = torch.cat(l_r, dim=0).to(device)
+        s_ = torch.cat(l_s_, dim=0).to(device)
+        done = torch.cat(l_done, dim=0).to(device)
+        self.data_level0 = []
+        return s, a, r, s_, done
+
     def update(self):
         self.step += 1
         # print("step:", self.step)
@@ -301,6 +326,60 @@ class Agent(object):
         self.old_p.load_state_dict(self.p.state_dict())
         self.old_v.load_state_dict(self.v.state_dict())
 
+    def update_level0(self):
+        s, a, r, s_, done = self.sample_level0()
+        for _ in range(K_epoch):
+            with torch.no_grad():
+
+                '''用于计算价值网络loss'''
+                td_target = r + GAMMA * self.old_v(s_) * (1 - done)
+
+                '''用于计算策略网络loss'''
+                action_logits = self.old_p_level0(s)
+                old_dist = Categorical(logits=action_logits)
+                log_prob_old = old_dist.log_prob(a)
+
+                td_error = r + GAMMA * self.v_level0(s_) * (1 - done) - self.v_level0(s)
+                A = []
+                adv = 0.0
+                if device.type == 'cuda':
+                    for td in td_error.flip(dims=[0]):  # 使用flip代替[::-1]来反转Tensor
+                        adv = adv * GAMMA * LAMBDA + td
+                        A.append(adv)
+                else:
+                    td_error = td_error.detach().numpy()
+                    for td in td_error[::-1]:
+                        adv = adv * GAMMA * LAMBDA + td[0]
+                        A.append(adv)
+                A.reverse()
+                A = torch.tensor(A, dtype=torch.float, device=device).reshape(-1, 1)
+
+            action_logits = self.p_level0(s)
+            new_dist = Categorical(logits=action_logits)
+            log_prob_new = new_dist.log_prob(a)
+
+            ratio = torch.exp(log_prob_new - log_prob_old)
+
+            L1 = ratio * A
+            L2 = torch.clamp(ratio, 1 - CLIP, 1 + CLIP) * A
+            loss_p = -torch.min(L1, L2).mean()
+            self.p_level0.optim.zero_grad()
+            loss_p.backward()
+            self.check_gradients()
+            self.p_level0.check_nan_parameters_in_net()
+            self.p_level0.optim.step()
+
+            loss_v = F.huber_loss(td_target.detach(), self.v_level0(s))
+            self.v_level0.optim.zero_grad()
+            loss_v.backward()
+            self.v_level0.optim.step()
+
+            self.writer.add_scalar("Actor_loss", loss_p.mean(), self.step)
+            self.writer.add_scalar("Critic_loss", loss_v.mean(), self.step)
+
+        self.old_p_level0.load_state_dict(self.p_level0.state_dict())
+        self.old_v_level0.load_state_dict(self.v_level0.state_dict())
+
     def check_gradients(self):
         for name, param in self.p.named_parameters():
             if param.grad is not None:
@@ -315,8 +394,8 @@ class Agent(object):
                 print(f"NaN or inf detected in {name}, resetting to 0")
                 param.data.fill_(0)
     def train(self):
-        self.loadAgentParas(self.agent_path)
-        self.loadNetParas()
+        # self.loadAgentParas(self.agent_path)
+        # self.loadNetParas()
         # print('state_size:', self.state_size)
         # print('action_size:', self.action_size)
         for count in range(MAX_EPOCHS):
@@ -330,19 +409,19 @@ class Agent(object):
             while not done:
                 # print(s)
                 # s = np.array(s)
+                EHMI = self.choose_action_level0(torch.tensor(s, dtype=torch.float))
+                EHMI_dict = {0: None, 1: 'R', 2: 'Y'}
+                self.env.unwrapped.update_EHMI(EHMI_dict[EHMI])
+                sub_s = np.append(s, EHMI)
+                a = self.choose_action(torch.tensor(sub_s, dtype=torch.float))
+                s_, r, done, truncated, _ = self.env.step(a)
+                sub_s_ = np.append(s_, EHMI)
 
-                a = self.choose_action(torch.tensor(s, dtype=torch.float))
-                a_ = copy.deepcopy(a)
-                if self.isHaveEHMI:
-                    self.env.unwrapped.EHMI = self.translateEHMI(a_[2])
-                    a_ = a_[:2]
-                s_, r, done, truncated, _ = self.env.step(a_)
-                # s_ = s_[:9]
-                self.env.render()
+                # self.env.render()
 
                 rewards += r
 
-                self.push_data((s, a, r, s_, done))
+                self.push_data((s, EHMI, r, s_, done), (sub_s, a, r, sub_s_, done))
                 s = s_
                 if truncated:
                     break
