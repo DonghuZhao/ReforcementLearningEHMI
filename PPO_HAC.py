@@ -35,10 +35,10 @@ class Policy(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(state_size, 128),
             nn.ReLU(),
-            # nn.Linear(128, 128),
-            # nn.ReLU(),
-            # nn.Linear(128, 128),
-            # nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
             nn.Linear(128, 256),
             nn.ReLU(),
         )
@@ -73,10 +73,10 @@ class DiscretePolicy(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(state_size, 128),
             nn.ReLU(),
-            # nn.Linear(128, 128),
-            # nn.ReLU(),
-            # nn.Linear(128, 128),
-            # nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
             nn.Linear(128, 256),
             nn.ReLU(),
         )
@@ -113,10 +113,10 @@ class Value(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(state_size, 128),
             nn.ReLU(),
-            # nn.Linear(128, 128),
-            # nn.ReLU(),
-            # nn.Linear(128, 128),
-            # nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
             nn.Linear(128, 256),
             nn.ReLU(),
             nn.Linear(256, 1),
@@ -447,6 +447,8 @@ class Agent(object):
         """save parameters of deep neural networks"""
         torch.save(self.p.state_dict(), r'.\model\p.pth')
         torch.save(self.v.state_dict(), r'.\model\v.pth')
+        torch.save(self.p_level0.state_dict(), r'.\model\p_level0.pth')
+        torch.save(self.v_level0.state_dict(), r'.\model\v_level0.pth')
         print('...save model...')
  
     def loadNetParas(self):
@@ -454,6 +456,8 @@ class Agent(object):
         try:
             self.p.load_state_dict(torch.load(r'.\model\p.pth'))
             self.v.load_state_dict(torch.load(r'.\model\v.pth'))
+            self.p_level0.load_state_dict(torch.load(r'.\model\p_level0.pth'))
+            self.v_level0.load_state_dict(torch.load(r'.\model\v_level0.pth'))
             print('...load...')
         except:
             pass
