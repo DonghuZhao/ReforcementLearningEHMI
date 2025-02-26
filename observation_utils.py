@@ -93,7 +93,7 @@ class ObservationUtils:
 
         # 判断yaw_rad是否在[-2pi,0]区间，如果不是则唤起错误
         if yaw_rad < -2 * math.pi or yaw_rad > 0:
-            raise ValueError("yaw_rad is not in the range of [-2pi, 0]")
+            return ObservationUtils.adjust_v_yaw(yaw_rad)
 
         return yaw_rad
 

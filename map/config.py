@@ -1,5 +1,5 @@
 import numpy as np
-from map.cubic_spline_planner import CubicSpline2D
+from .cubic_spline_planner import CubicSpline2D
 import math
 # import matplotlib.pyplot as plt
 
@@ -45,7 +45,7 @@ def generate_target_course(x, y):
 
     return rx, ry, ryaw, rk, csp
 
-def Reference_line_build():
+def LeftRefLineBuild():
     ##-------------------------左转车参考路径----------------------
     P1_x, P1_y = construct_line(P0[0], P0[1], P_ex[0], P_ex[1], x=P0[0] + 5 * math.cos(46.4 / 360 * math.pi))
     P1 = np.array([P1_x, P1_y])
@@ -64,8 +64,20 @@ def Reference_line_build():
     tx, ty, tyaw, tc, csp = generate_target_course(wx, wy)
     return tx, ty, tyaw, csp
 
+def StrRefLineBuild():
+    # 构造参考线
+    P_ex = np.array([100, 18.12])
+    P_en = np.array([-26, 18.12])
+
+    reference_line = np.vstack((P_ex, P_en))
+
+    wx = reference_line[:, 0]
+    wy = reference_line[:, 1]
+    tx, ty, tyaw, tc, csp = generate_target_course(wx, wy)
+    return tx, ty, tyaw, csp
+
 global tx, ty, tyaw, csp
-tx, ty, tyaw, csp = Reference_line_build()
+tx, ty, tyaw, csp = LeftRefLineBuild()
 # plt.plot(tx, ty)
 # plt.plot(P_ex[0], P_ex[1], "xr")
 # plt.plot(P_en[0], P_en[1], "xr")
