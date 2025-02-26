@@ -212,8 +212,14 @@ class Agent(object):
     def choose_action_level0(self, s):
         with torch.no_grad():
             s = s.to(device)
-            EHMI = self.p_level0(s)
-        return EHMI.argmax().item()
+            logits = self.p_level0(s)
+        # # 使用Softmax将logits转换为概率分布
+        # action_probs = F.softmax(logits, dim=-1).cpu().numpy()
+        #
+        # action = np.random.choice(len(action_probs), p=action_probs)
+        #
+        # return action
+        return logits.argmax().item()
 
     def translateEHMI(self, value):
         if value > 0.5:
@@ -394,8 +400,8 @@ class Agent(object):
                 print(f"NaN or inf detected in {name}, resetting to 0")
                 param.data.fill_(0)
     def train(self):
-        # self.loadAgentParas(self.agent_path)
-        # self.loadNetParas()
+        self.loadAgentParas(self.agent_path)
+        self.loadNetParas()
         # print('state_size:', self.state_size)
         # print('action_size:', self.action_size)
         for count in range(MAX_EPOCHS):
@@ -410,6 +416,7 @@ class Agent(object):
                 # print(s)
                 # s = np.array(s)
                 EHMI = self.choose_action_level0(torch.tensor(s, dtype=torch.float))
+                # EHMI = 2
                 EHMI_dict = {0: None, 1: 'R', 2: 'Y'}
                 self.env.unwrapped.update_EHMI(EHMI_dict[EHMI])
                 sub_s = np.append(s, EHMI)
@@ -417,7 +424,7 @@ class Agent(object):
                 s_, r, done, truncated, _ = self.env.step(a)
                 sub_s_ = np.append(s_, EHMI)
 
-                # self.env.render()
+                self.env.render()
 
                 rewards += r
 
